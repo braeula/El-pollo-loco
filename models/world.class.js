@@ -6,7 +6,10 @@ class World {
     camera_x = 0;
     background_sound_1 = new Audio('audio/background.mp3');
     background_sound_2 = new Audio('audio/background_1.mp3');
-    statusbar = new StatusBar();
+    statusbar_health = new StatusBar('health');
+    statusbar_bottle = new StatusBar('bottle');
+    statusbar_coin = new StatusBar('coin');
+    statusbar_endboss = new StatusBar('endboss');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -23,7 +26,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy);
+                    this.statusbar_health.setPercentageHealth(this.character.energy);
                 };
             });
         }, 200);
@@ -59,7 +62,11 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusbar);
+        // ------ space for fixed objects ------
+        this.addToMap(this.statusbar_health);
+        this.addToMap(this.statusbar_bottle);
+        this.addToMap(this.statusbar_coin);
+        this.addToMap(this.statusbar_endboss);
         this.ctx.translate(this.camera_x, 0);
 
         this.ctx.translate(-this.camera_x, 0);
