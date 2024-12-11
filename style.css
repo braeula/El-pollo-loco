@@ -1,8 +1,24 @@
+@font-face { 
+    font-family: "Zabras"; 
+    src: url("./fonts/Zabars.ttf"); 
+    }
+
 body{
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: rgba(48, 42, 42, 0.842);
+    background-image: url('./img/desert.png');
+    background-position: cover;
+    font-family: 'Zabras', Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+    height: 100vh;
+    justify-content: center;    
+}
+
+h1 {
+    font-size: 48px;
 }
 
 canvas{

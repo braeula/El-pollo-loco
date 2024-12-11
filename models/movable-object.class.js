@@ -42,9 +42,12 @@ class MovableObject extends DrawableObject {
     };
 
     isAboveGround() {
-        return this.y < 135;
+        if (this instanceof ThrowableObject) { // Throwable Object should always fall
+            return true;
+        } else {
+            return this.y < 135;
+        };
     };
-
     moveRight() {
         setInterval(() => {
             this.x += this.speed;

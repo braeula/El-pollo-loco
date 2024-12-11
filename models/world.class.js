@@ -10,6 +10,7 @@ class World {
     statusbar_bottle = new StatusBar('bottle');
     statusbar_coin = new StatusBar('coin');
     statusbar_endboss = new StatusBar('endboss');
+    throwableObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -18,19 +19,34 @@ class World {
         this.draw();
         this.setWorld();
         // this.playAudioLoop();
-        this.checkCollisions();
+        this.run();
     };
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusbar_health.setPercentageHealth(this.character.energy);
-                };
-            });
+
+            this.checkCollisions()
+            this.checkThrowObjects()
+
         }, 200);
     };
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            this.throwableObject.push(bottle)
+
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusbar_health.setPercentageHealth(this.character.energy);
+            };
+        });
+    }
 
     playAudioLoop() {
         // Starte das erste Audio
@@ -53,14 +69,17 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.bottles)
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        
+        this.addObjectsToMap(this.throwableObject);
+
+
         this.ctx.translate(-this.camera_x, 0);
         // ------ space for fixed objects ------
         this.addToMap(this.statusbar_health);
@@ -79,7 +98,7 @@ class World {
     };
 
     addToMap(ob) {
-        
+
         if (ob.otherDirection) {
             this.ctx.save();
             this.ctx.translate(ob.width, 0);
