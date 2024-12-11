@@ -3,7 +3,7 @@ class Character extends MovableObject {
     width = 150;
     x = 20;
     y = 435 - this.height;
-    speed = 10;
+    speed = 5;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -68,7 +68,7 @@ class Character extends MovableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
             };
-            if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround()) {
+            if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.speedY = 20;
                 this.jumping_sound.play();
             }
