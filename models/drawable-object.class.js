@@ -26,4 +26,11 @@ class DrawableObject {
             this.imageCache[path] = path;
         });
     };
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length; //modulo
+        let path = images[i];
+        this.img.src = this.imageCache[path];
+        this.currentImage++;
+    }
 };

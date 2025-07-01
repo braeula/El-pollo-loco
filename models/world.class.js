@@ -24,18 +24,24 @@ class World {
 
     run() {
         setInterval(() => {
-
-            this.checkCollisions()
-            this.checkThrowObjects()
-
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);
     };
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE) {
+        if (this.keyboard.SPACE && this.statusbar_bottle.percentageBottle > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
-            this.throwableObject.push(bottle)
+            let endboss = this.level.endboss;
+            this.throwableObject.push(bottle);
+            this.statusbar_bottle.percentageBottle -= 20;
+            this.statusbar_bottle.setPercentageBottle(this.statusbar_bottle.percentageBottle);
+            if (bottle.isColliding(endboss)) {
 
+                endboss.hit();
+                endboss.energy -= 20;
+                this.statusbar_endboss.setPercentageEndboss(endboss.energy);
+            };
         }
     }
 
@@ -46,17 +52,32 @@ class World {
                 this.statusbar_health.setPercentageHealth(this.character.energy);
             };
         });
+
+        for (let i = this.level.bottles.length - 1; i >= 0; i--) {
+            const bottle = this.level.bottles[i];
+            if (this.character.isColliding(bottle) && this.statusbar_bottle.percentageBottle < 100) {
+                this.level.bottles.splice(i, 1); // entfernt
+                this.statusbar_bottle.percentageBottle += 20;
+                this.statusbar_bottle.setPercentageBottle(this.statusbar_bottle.percentageBottle);
+            }
+        }
+        for (let i = this.level.coins.length - 1; i >= 0; i--) {
+            const coin = this.level.coins[i];
+            if (this.character.isColliding(coin) && this.statusbar_coin.percentageCoin < 100) {
+                this.level.coins.splice(i, 1); // entfernt
+                this.statusbar_coin.percentageCoin += 20;
+                this.statusbar_coin.setPercentageCoins(this.statusbar_coin.percentageCoin);
+            }
+        }
     }
 
     playAudioLoop() {
         // Starte das erste Audio
         this.background_sound_1.play();
-
         // Wenn das erste Audio endet, starte das zweite
         this.background_sound_1.addEventListener('ended', () => {
             this.background_sound_2.play();
         });
-
         // Wenn das zweite Audio endet, starte wieder das erste
         this.background_sound_2.addEventListener('ended', () => {
             this.background_sound_1.play();
@@ -74,14 +95,16 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.bottles)
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObject);
 
 
         this.ctx.translate(-this.camera_x, 0);
-        // ------ space for fixed objects ------
+        // ------ Platz für fixierte Objekte ------
         this.addToMap(this.statusbar_health);
         this.addToMap(this.statusbar_bottle);
         this.addToMap(this.statusbar_coin);

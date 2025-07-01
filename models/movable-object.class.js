@@ -24,13 +24,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    // character.isColliding(chicken)
     isColliding(mO) {
         return this.x + this.width - 30 > mO.x + 10 &&
+            this.x + 30 < mO.x + mO.width - 10 &&
             this.y + this.height > mO.y &&
-            this.x < mO.x &&
-            this.y < mO.y + mO.height
-    };
+            this.y + 120 < mO.y + mO.height;
+    }
 
     applyGravity() {
         setInterval(() => {
@@ -60,12 +59,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     };
 
-    playAnimation(images) {
-        let i = this.currentImage % images.length; //modulo
-        let path = images[i];
-        this.img.src = this.imageCache[path];
-        this.currentImage++;
-    }
+    
 
 
 };

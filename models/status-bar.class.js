@@ -48,8 +48,8 @@ class StatusBar extends DrawableObject {
         this.loadImages(this.IMAGES_ENDBOSS);
 
         if (type == 'health') { this.setPercentageHealth(100) }
-        if (type == 'bottle') { this.setPercentageBottle(0) }
-        if (type == 'coin') { this.setPercentageCoins(0) }
+        if (type == 'bottle') { this.setPercentageBottle(this.percentageBottle) }
+        if (type == 'coin') { this.setPercentageCoins(this.percentageCoin) }
         if (type == 'endboss') { this.setPercentageEndboss(100) }
         this.height = 50;
         this.width = 200;
@@ -87,13 +87,13 @@ class StatusBar extends DrawableObject {
     resolveImageIndex(percentage) {
         if (percentage == 100) {
             return 5;
-        } else if (percentage > 80) {
+        } else if (percentage >= 80) {
             return 4;
-        } else if (percentage > 60) {
+        } else if (percentage >= 60) {
             return 3;
-        } else if (percentage > 40) {
+        } else if (percentage >= 40) {
             return 2;
-        } else if (percentage > 20) {
+        } else if (percentage > 0) {
             return 1;
         } else {
             return 0;
