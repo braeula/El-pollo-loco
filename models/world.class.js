@@ -112,7 +112,7 @@ class World {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {
             if (!this.level.enemies[i].killed && this.character.isColliding(this.level.enemies[i]) && this.characterAttacksChicken()) {
                 this.level.enemies[i].killed = true;
-                this.character.speedY = 10;                
+                this.character.speedY = 10;
                 const enemy = this.level.enemies[i]; // im Loop speichern
                 setTimeout(() => {
                     const index = this.level.enemies.indexOf(enemy); //ergibt -1, wenn das Obj nicht mehr existiert
@@ -141,7 +141,6 @@ class World {
                 this.throwableObject.splice(i, 1); // Flasche entfernen nach Treffer
             }
         }
-
 
         for (let i = this.level.bottles.length - 1; i >= 0; i--) {
             const bottle = this.level.bottles[i];

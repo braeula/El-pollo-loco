@@ -9,33 +9,17 @@ img.onload = function () {
     // Zeichne das Bild auf das Canvas, sobald es geladen ist
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    ctx.drawImage(img, ((img.width / img.height * 480)-720)/-2 +10, 0, img.width / img.height * 450 , 480);
+    ctx.drawImage(img, ((img.width / img.height * 480) - 720) / -2 + 10, 0, img.width / img.height * 450, 480);
 };
 
-// let endscreen = new Image()
-// endscreen.src = 'img/9_intro_outro_screens/win/won_2.png';
-
-// if (world.character.isDead()) {
-//     // world.gameOver = true;
-//     // world.endscreen.src = 'img/9_intro_outro_screens/game_over/oh no you lost!.png';
-
-// } 
-
-
-function init() {
+function startGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    // if (world.level.endboss[0].energy == 0) {
-    //     // world.gameOver = true;
-
-    //     // world.endscreen.src = 'img/9_intro_outro_screens/game_over/oh no you lost!.png';
-    //     endscreen.onload = function () {
-    //         // Zeichne das Bild auf das Canvas, sobald es geladen ist
-    //         let canvas = document.getElementById('canvas');
-    //         let ctx = canvas.getContext('2d');
-    //         ctx.drawImage(endscreen, 0, 0, 720, 480);
-    //     }
-    // }
+    document.getElementById('start').classList.toggle('d-none');
+    document.getElementById('restart').classList.toggle('d-none')
+}
+function newGame() {
+    location.reload();
 }
 
 window.addEventListener("keydown", (e) => {
@@ -58,7 +42,6 @@ window.addEventListener("keydown", (e) => {
     // if (e.keyCode == 68) {
     //     keyboard.D = true;
     // }
-
 })
 
 window.addEventListener("keyup", (e) => {
@@ -81,5 +64,4 @@ window.addEventListener("keyup", (e) => {
     // if (e.keyCode == 68) {
     //     keyboard.D = false;
     // }
-
 })

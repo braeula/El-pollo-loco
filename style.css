@@ -1,9 +1,9 @@
-@font-face { 
-    font-family: "Zabras"; 
-    src: url("./fonts/Zabars.ttf"); 
-    }
+@font-face {
+    font-family: "Zabras";
+    src: url("./fonts/Zabars.ttf");
+}
 
-body{
+body {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -14,16 +14,16 @@ body{
     font-family: 'Zabras', Arial, Helvetica, sans-serif;
     letter-spacing: 3px;
     height: 100vh;
-    justify-content: center; 
+    justify-content: center;
     font-size: 24px;
-    gap: 40px;   
+    gap: 40px;
 }
 
 h1 {
     font-size: 48px;
 }
 
-canvas{
+canvas {
     background-color: black;
     display: block;
 }
@@ -43,6 +43,10 @@ canvas{
     color: blanchedalmond;
 }
 
+.d-none {
+    display: none;
+}
+
 
 
 /* Smartphones ----------- */
@@ -57,6 +61,7 @@ canvas{
     canvas {
         height: 100vh;
     }
+
     h1 {
         display: none;
     }
