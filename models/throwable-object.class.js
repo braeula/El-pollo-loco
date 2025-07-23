@@ -1,8 +1,9 @@
 class ThrowableObject extends MovableObject {
     speedX = 20;
-
     height = 80;
     width = 80;
+    endboss;
+    world;
 
     IMAGES = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -26,6 +27,7 @@ class ThrowableObject extends MovableObject {
             this.x += this.speedX;
             this.playAnimation(this.IMAGES)
         }, 50);
+        
     }
 
 };

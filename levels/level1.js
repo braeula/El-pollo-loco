@@ -20,9 +20,12 @@ level1 = new Level(
         new Coin(),
     ],
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+        new Chicken('small'),
+        // new Chicken('small'),
+        new Chicken('small'),
+        new Chicken('normal'),
+        new Chicken('normal'),
+        // new Chicken('normal'),
     ],
     [
         new Endboss(),

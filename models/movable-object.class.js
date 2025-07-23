@@ -18,8 +18,8 @@ class MovableObject extends DrawableObject {
     };
 
     hit() {
-        if (this.energy > 0) {
-            this.energy -= 5;
+        if (this.energy > 0 && !this.isHurt()) {
+            this.energy -= 20;
             this.lastHit = new Date().getTime();
         }
     }
@@ -29,6 +29,11 @@ class MovableObject extends DrawableObject {
             this.x + 30 < mO.x + mO.width - 10 &&
             this.y + this.height > mO.y &&
             this.y + 120 < mO.y + mO.height;
+
+        // return this.x < mO.x + mO.width &&
+        //     this.x + this.width > mO.x &&
+        //     this.y < mO.y + mO.height &&
+        //     this.y + this.height > mO.y;
     }
 
     applyGravity() {
@@ -47,6 +52,7 @@ class MovableObject extends DrawableObject {
             return this.y < 135;
         };
     };
+
     moveRight() {
         setInterval(() => {
             this.x += this.speed;
@@ -59,7 +65,14 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     };
 
-    
+    moveDown() {
+        setInterval(() => {
+            this.y += this.speedY;
+        }, 1000 / 60);
+    };
+
+
+
 
 
 };

@@ -50,7 +50,7 @@ class StatusBar extends DrawableObject {
         if (type == 'health') { this.setPercentageHealth(100) }
         if (type == 'bottle') { this.setPercentageBottle(this.percentageBottle) }
         if (type == 'coin') { this.setPercentageCoins(this.percentageCoin) }
-        if (type == 'endboss') { this.setPercentageEndboss(100) }
+        if (type == 'endboss') { this.setPercentageEndboss(this.percentageEndboss) }
         this.height = 50;
         this.width = 200;
     }
