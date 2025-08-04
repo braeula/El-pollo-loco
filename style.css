@@ -57,12 +57,16 @@ canvas {
 }
 
 /* Smartphones ----------- */
-@media only screen and (max-height: 720px) {
+@media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
     }
 
     h1 {
+        display: none;
+    }
+
+    .description {
         display: none;
     }
 }
